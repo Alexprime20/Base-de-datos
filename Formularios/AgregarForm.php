@@ -32,15 +32,53 @@
                 <input type="text" class="form-control" name="NroEdicion">
             </div>
 
+            
             <div class="mb-3">
-                <label class="form-label">Autor</label>
-                <input type="text" class="form-control" name="Autor">
+                <label class="form-label" for="Autor">Autor</label>
+                <select class="form-select mb-3" name="autores" id="autores">
+                    <option selected disabled>--Seleccione la Editorial--</option>
+                    <?php
+                    // Mostrar errores PHP
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', 1);
+
+                    include ("../config/conexion.php");
+
+                    $sql = $conexion->query("SELECT * FROM autor");
+                    if ($sql) {
+                        while ($resultado = $sql->fetch_assoc()) {
+                            echo "<option value='" . $resultado['ID_Autor'] . "'>" . $resultado['NombreAutor'] . "</option>";
+                        }
+                    } else {
+                        echo "<option disabled>Error en la consulta</option>";
+                    }
+                    ?>
+                </select>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Editorial</label>
-                <input type="text" class="form-control" name="Editorial">
+                <label class="form-label" for="Editorial">Editorial</label>
+                <select class="form-select mb-3" name="editoriales" id="editoriales">
+                    <option selected disabled>--Seleccione la Editorial--</option>
+                    <?php
+                    // Mostrar errores PHP
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', 1);
+
+                    include ("../config/conexion.php");
+
+                    $sql = $conexion->query("SELECT * FROM editorial");
+                    if ($sql) {
+                        while ($resultado = $sql->fetch_assoc()) {
+                            echo "<option value='" . $resultado['ID_Editorial'] . "'>" . $resultado['NombreEditorial'] . "</option>";
+                        }
+                    } else {
+                        echo "<option disabled>Error en la consulta</option>";
+                    }
+                    ?>
+                </select>
             </div>
+
 
             <div class="mb-3">
                 <label class="form-label" for="Genero">Genero</label>

@@ -27,8 +27,8 @@
                         <th scope="col">FECHA DE PUBLICACION</th>
                         <th scope="col">GENERO</th>
                         <th scope="col">NRO DE EDICION</th>
-                        <th scope="col">ID DE AUTOR</th>
-                        <th scope="col">ID DE EDITORIAL</th>
+                        <th scope="col">AUTOR</th>
+                        <th scope="col">EDITORIAL</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +39,7 @@
                         INNER JOIN autores ON comics.ID_Autor = autores.ID_Autor
                         INNER JOIN editoriales ON comics.ID_Editorial = editoriales.ID_Editoriales
                         INNER JOIN genero ON comics.ID_Genero = genero.ID_Genero
+                        INNER JOIN autor ON autores.ID_autor = autor.ID_Autor
                     ");
 
                     if ($sql === false) {

@@ -1,9 +1,16 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 include ("../config/conexion.php");
+
 
 if (!$conexion) {
     die("Error al conectar con la base de datos: " . mysqli_connect_error());
 }
+
 
 $genero = isset($_POST['ID_Genero']) ? $_POST['ID_Genero'] : '';
 $titulo = isset($_POST['Titulo']) ? $_POST['Titulo'] : '';
@@ -13,15 +20,21 @@ $Autor = isset($_POST['Autor']) ? $_POST['Autor'] : '';
 $Editorial = isset($_POST['Editorial']) ? $_POST['Editorial'] : '';
 
 
-$sql = "INSERT INTO comics (Titulo, Fecha_Publicacion, ID_Genero, Nro_Edicion, ID_Autor,  ID_Editorial) VALUES 
+$sql = "INSERT INTO comics (ID_Genero, Titulo, Fecha_Publicacion, Nro_Edicion, ID_Autor, ID_Editorial) VALUES 
 ('$genero', '$titulo', '$FechaPublicacion', '$NroEdicion', '$Autor', '$Editorial')";
 
+
+echo $sql;
+
+
 $resultado = mysqli_query($conexion, $sql);
-echo $resultado;
+
 
 if ($resultado === TRUE) {
 
     header('location:../index.php');
 } else {
-    echo "Datos NO insertados";
+
+    echo "Error al insertar datos: " . mysqli_error($conexion);
 }
+?>
